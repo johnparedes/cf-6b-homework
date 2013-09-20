@@ -1,4 +1,13 @@
 Blog::Application.routes.draw do
+  get "sessions/new"
+  root "posts#index"
+  resources :posts
+  resources :users, only: [:new, :create]
+  resources :sessions, only: [:create]
+
+  get "/login", to: "sessions#new"
+  get "/logout", to: "sessions#destroy"
+  get "/secret", to: "posts#secret"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -39,7 +48,7 @@ Blog::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
