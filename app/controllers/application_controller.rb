@@ -8,8 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
   def user_logged_in
-    if session[:user_id]
-    else
+    unless current_user.present?
       flash[:alert] = "Nu uh uh. You don't have access to this."
       redirect_to root_url
     end
